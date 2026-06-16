@@ -1,55 +1,55 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://drqhon543sjb3"]
 
 [ext_resource type="Script" uid="uid://1x41enyfoi2j" path="res://scripts/player1.gd" id="1_script"]
 [ext_resource type="Shader" uid="uid://cyt1rcaldsb1a" path="res://shaders/ball.gdshader" id="2_shader"]
+[ext_resource type="AudioStream" uid="uid://dol0e6cexbd77" path="res://Audio/Orb_Collect.ogg" id="3_ine82"]
 [ext_resource type="PackedScene" path="res://UI/UI.tscn" id="3_ui"]
+
+[sub_resource type="PhysicsMaterial" id="2_phys"]
+friction = 0.8
+bounce = 0.3
 
 [sub_resource type="ShaderMaterial" id="1_mat"]
 shader = ExtResource("2_shader")
-shader_parameter/ball_color = Color(0.0, 1.5, 3.5, 1.0)
+shader_parameter/ball_color = Color(0, 1.5, 3.5, 1)
 shader_parameter/light_dir = Vector3(0.4, -0.7, 0.6)
 shader_parameter/ambient = 0.15
 shader_parameter/specular_power = 32.0
 shader_parameter/specular_strength = 0.8
 
-[sub_resource type="PhysicsMaterial" id="2_phys"]
-bounce = 0.3
-friction = 0.8
-
 [sub_resource type="CircleShape2D" id="3_shape"]
 radius = 32.0
 
 [sub_resource type="Environment" id="4_env"]
-background_mode = 0
-background_color = Color(0.02, 0.02, 0.05, 1.0)
+background_color = Color(0.02, 0.02, 0.05, 1)
 glow_enabled = true
-glow_normalized = false
 glow_intensity = 1.2
 glow_bloom = 0.5
 glow_hdr_threshold = 0.5
-glow_hdr_scale = 2.0
 
-[node name="Player1" type="RigidBody2D"]
+[node name="Player1" type="RigidBody2D" unique_id=1308673446]
+physics_material_override = SubResource("2_phys")
 contact_monitor = true
 max_contacts_reported = 4
-physics_material_override = SubResource("2_phys")
 script = ExtResource("1_script")
 metadata/_groups = ["player"]
 
-[node name="Visual" type="ColorRect" parent="."]
+[node name="Visual" type="ColorRect" parent="." unique_id=377406354]
 material = SubResource("1_mat")
 offset_left = -32.0
 offset_top = -32.0
 offset_right = 32.0
 offset_bottom = 32.0
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=702882708]
 shape = SubResource("3_shape")
 
-[node name="Camera" type="Camera2D" parent="."]
-enabled = true
+[node name="Camera" type="Camera2D" parent="." unique_id=1843303243]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1835626455]
 environment = SubResource("4_env")
 
-[node name="UI" parent="." instance=ExtResource("3_ui")]
+[node name="OrbCollectSound" type="AudioStreamPlayer" parent="." unique_id=263391929]
+stream = ExtResource("3_ine82")
+
+[node name="UI" parent="." unique_id=21576640 instance=ExtResource("3_ui")]

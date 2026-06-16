@@ -47,4 +47,5 @@ func grow() -> void:
 	visual.offset_top = -new_radius
 	visual.offset_right = new_radius
 	visual.offset_bottom = new_radius
+	$OrbCollectSound.play()
 	orb_collected.emit()
