@@ -3,6 +3,10 @@
 [ext_resource type="PackedScene" path="res://Player/player1.tscn" id="1_ball"]
 [ext_resource type="Script" uid="uid://b1epycjqey3iu" path="res://scripts/rotating_bar.gd" id="2_rotscript"]
 [ext_resource type="PackedScene" uid="uid://c0maryol32tq8" path="res://Orbs/Orb.tscn" id="3_0bbpv"]
+[ext_resource type="Script" uid="uid://c4o68qs85am7g" path="res://scripts/death_ceiling.gd" id="4_ceiling"]
+
+[sub_resource type="RectangleShape2D" id="6_ceiling"]
+size = Vector2(1200, 20)
 
 [sub_resource type="RectangleShape2D" id="1_floor"]
 size = Vector2(1200, 32)
@@ -20,6 +24,21 @@ size = Vector2(180, 14)
 size = Vector2(140, 18)
 
 [node name="Main" type="Node2D" unique_id=17064370]
+
+[node name="DeathCeiling" type="Area2D" parent="." unique_id=500000001]
+position = Vector2(600, -30)
+script = ExtResource("4_ceiling")
+acceleration = 7.285
+
+[node name="Collision" type="CollisionShape2D" parent="DeathCeiling" unique_id=500000002]
+shape = SubResource("6_ceiling")
+
+[node name="Visual" type="ColorRect" parent="DeathCeiling" unique_id=500000003]
+offset_left = -600.0
+offset_top = -10.0
+offset_right = 600.0
+offset_bottom = 10.0
+color = Color(0.8, 0.1, 0.1, 1)
 
 [node name="Player1" parent="." unique_id=1848488516 instance=ExtResource("1_ball")]
 position = Vector2(600, 100)
@@ -61,7 +80,7 @@ offset_right = 16.0
 offset_bottom = 2100.0
 
 [node name="P01" type="StaticBody2D" parent="." unique_id=864049207]
-position = Vector2(280, 320)
+position = Vector2(600, 260)
 
 [node name="Collision" type="CollisionShape2D" parent="P01" unique_id=289205172]
 shape = SubResource("3_plat_lg")
@@ -72,10 +91,22 @@ offset_top = -9.0
 offset_right = 100.0
 offset_bottom = 9.0
 
+[node name="P02" type="StaticBody2D" parent="." unique_id=1689485564]
+position = Vector2(220, 430)
+
+[node name="Collision" type="CollisionShape2D" parent="P02" unique_id=77090033]
+shape = SubResource("3_plat_lg")
+
+[node name="Visual" type="ColorRect" parent="P02" unique_id=1625594639]
+offset_left = -100.0
+offset_top = -9.0
+offset_right = 100.0
+offset_bottom = 9.0
+
 [node name="B01" type="AnimatableBody2D" parent="." unique_id=1874493686]
-position = Vector2(750, 430)
+position = Vector2(580, 510)
 script = ExtResource("2_rotscript")
-rotation_speed = 1.2
+rotation_speed = 0.9
 
 [node name="Collision" type="CollisionShape2D" parent="B01" unique_id=1264097051]
 shape = SubResource("5_bar")
@@ -86,33 +117,8 @@ offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
-[node name="P02" type="StaticBody2D" parent="." unique_id=1689485564]
-position = Vector2(880, 560)
-
-[node name="Collision" type="CollisionShape2D" parent="P02" unique_id=77090033]
-shape = SubResource("4_plat_sm")
-
-[node name="Visual" type="ColorRect" parent="P02" unique_id=1625594639]
-offset_left = -70.0
-offset_top = -9.0
-offset_right = 70.0
-offset_bottom = 9.0
-
-[node name="B02" type="StaticBody2D" parent="." unique_id=1933364675]
-position = Vector2(350, 680)
-rotation = -0.35
-
-[node name="Collision" type="CollisionShape2D" parent="B02" unique_id=1620768402]
-shape = SubResource("5_bar")
-
-[node name="Visual" type="ColorRect" parent="B02" unique_id=1980561017]
-offset_left = -90.0
-offset_top = -7.0
-offset_right = 90.0
-offset_bottom = 7.0
-
 [node name="P03" type="StaticBody2D" parent="." unique_id=632979473]
-position = Vector2(560, 800)
+position = Vector2(900, 580)
 
 [node name="Collision" type="CollisionShape2D" parent="P03" unique_id=190031723]
 shape = SubResource("3_plat_lg")
@@ -123,9 +129,34 @@ offset_top = -9.0
 offset_right = 100.0
 offset_bottom = 9.0
 
+[node name="B02" type="StaticBody2D" parent="." unique_id=1933364675]
+position = Vector2(780, 690)
+rotation = 0.25
+
+[node name="Collision" type="CollisionShape2D" parent="B02" unique_id=1620768402]
+shape = SubResource("5_bar")
+
+[node name="Visual" type="ColorRect" parent="B02" unique_id=1980561017]
+offset_left = -90.0
+offset_top = -7.0
+offset_right = 90.0
+offset_bottom = 7.0
+
+[node name="P04" type="StaticBody2D" parent="." unique_id=1624255841]
+position = Vector2(440, 760)
+
+[node name="Collision" type="CollisionShape2D" parent="P04" unique_id=1688554749]
+shape = SubResource("3_plat_lg")
+
+[node name="Visual" type="ColorRect" parent="P04" unique_id=1400492808]
+offset_left = -100.0
+offset_top = -9.0
+offset_right = 100.0
+offset_bottom = 9.0
+
 [node name="B03" type="StaticBody2D" parent="." unique_id=433097147]
-position = Vector2(850, 930)
-rotation = 0.3
+position = Vector2(300, 880)
+rotation = -0.3
 
 [node name="Collision" type="CollisionShape2D" parent="B03" unique_id=1896253402]
 shape = SubResource("5_bar")
@@ -136,22 +167,34 @@ offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
-[node name="P04" type="StaticBody2D" parent="." unique_id=1624255841]
-position = Vector2(200, 1050)
+[node name="P05" type="StaticBody2D" parent="." unique_id=888367718]
+position = Vector2(820, 940)
 
-[node name="Collision" type="CollisionShape2D" parent="P04" unique_id=1688554749]
+[node name="Collision" type="CollisionShape2D" parent="P05" unique_id=693913806]
 shape = SubResource("4_plat_sm")
 
-[node name="Visual" type="ColorRect" parent="P04" unique_id=1400492808]
+[node name="Visual" type="ColorRect" parent="P05" unique_id=625353857]
 offset_left = -70.0
 offset_top = -9.0
 offset_right = 70.0
 offset_bottom = 9.0
 
+[node name="P06" type="StaticBody2D" parent="." unique_id=490255008]
+position = Vector2(250, 1090)
+
+[node name="Collision" type="CollisionShape2D" parent="P06" unique_id=650031686]
+shape = SubResource("3_plat_lg")
+
+[node name="Visual" type="ColorRect" parent="P06" unique_id=1801864469]
+offset_left = -100.0
+offset_top = -9.0
+offset_right = 100.0
+offset_bottom = 9.0
+
 [node name="B04" type="AnimatableBody2D" parent="." unique_id=1342465294]
-position = Vector2(620, 1160)
+position = Vector2(700, 1200)
 script = ExtResource("2_rotscript")
-rotation_speed = -2.0
+rotation_speed = -1.8
 
 [node name="Collision" type="CollisionShape2D" parent="B04" unique_id=1667179825]
 shape = SubResource("5_bar")
@@ -162,21 +205,21 @@ offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
-[node name="P05" type="StaticBody2D" parent="." unique_id=888367718]
-position = Vector2(940, 1280)
+[node name="P07" type="StaticBody2D" parent="." unique_id=266243931]
+position = Vector2(900, 1320)
 
-[node name="Collision" type="CollisionShape2D" parent="P05" unique_id=693913806]
-shape = SubResource("3_plat_lg")
+[node name="Collision" type="CollisionShape2D" parent="P07" unique_id=1689178934]
+shape = SubResource("4_plat_sm")
 
-[node name="Visual" type="ColorRect" parent="P05" unique_id=625353857]
-offset_left = -100.0
+[node name="Visual" type="ColorRect" parent="P07" unique_id=478059304]
+offset_left = -70.0
 offset_top = -9.0
-offset_right = 100.0
+offset_right = 70.0
 offset_bottom = 9.0
 
 [node name="B05" type="StaticBody2D" parent="." unique_id=1107486834]
-position = Vector2(360, 1400)
-rotation = 0.35
+position = Vector2(500, 1430)
+rotation = 0.3
 
 [node name="Collision" type="CollisionShape2D" parent="B05" unique_id=323378279]
 shape = SubResource("5_bar")
@@ -187,109 +230,59 @@ offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
-[node name="P06" type="StaticBody2D" parent="." unique_id=490255008]
-position = Vector2(500, 1530)
+[node name="P08" type="StaticBody2D" parent="." unique_id=135601491]
+position = Vector2(600, 1570)
 
-[node name="Collision" type="CollisionShape2D" parent="P06" unique_id=650031686]
-shape = SubResource("4_plat_sm")
-
-[node name="Visual" type="ColorRect" parent="P06" unique_id=1801864469]
-offset_left = -70.0
-offset_top = -9.0
-offset_right = 70.0
-offset_bottom = 9.0
-
-[node name="B06" type="StaticBody2D" parent="." unique_id=1345577262]
-position = Vector2(830, 1650)
-rotation = -0.3
-
-[node name="Collision" type="CollisionShape2D" parent="B06" unique_id=1241687513]
-shape = SubResource("5_bar")
-
-[node name="Visual" type="ColorRect" parent="B06" unique_id=725574528]
-offset_left = -90.0
-offset_top = -7.0
-offset_right = 90.0
-offset_bottom = 7.0
-
-[node name="P07" type="StaticBody2D" parent="." unique_id=266243931]
-position = Vector2(280, 1780)
-
-[node name="Collision" type="CollisionShape2D" parent="P07" unique_id=1689178934]
+[node name="Collision" type="CollisionShape2D" parent="P08" unique_id=1316071515]
 shape = SubResource("3_plat_lg")
 
-[node name="Visual" type="ColorRect" parent="P07" unique_id=478059304]
+[node name="Visual" type="ColorRect" parent="P08" unique_id=1301330273]
 offset_left = -100.0
 offset_top = -9.0
 offset_right = 100.0
 offset_bottom = 9.0
 
-[node name="B07" type="AnimatableBody2D" parent="." unique_id=12518339]
-position = Vector2(680, 1900)
+[node name="B06" type="AnimatableBody2D" parent="." unique_id=12518339]
+position = Vector2(280, 1690)
 script = ExtResource("2_rotscript")
-rotation_speed = 1.8
+rotation_speed = 2.0
 
-[node name="Collision" type="CollisionShape2D" parent="B07" unique_id=1004934537]
+[node name="Collision" type="CollisionShape2D" parent="B06" unique_id=1004934537]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B07" unique_id=180353502]
-offset_left = -90.0
-offset_top = -7.0
-offset_right = 90.0
-offset_bottom = 7.0
-
-[node name="P08" type="StaticBody2D" parent="." unique_id=135601491]
-position = Vector2(900, 2030)
-
-[node name="Collision" type="CollisionShape2D" parent="P08" unique_id=1316071515]
-shape = SubResource("4_plat_sm")
-
-[node name="Visual" type="ColorRect" parent="P08" unique_id=1301330273]
-offset_left = -70.0
-offset_top = -9.0
-offset_right = 70.0
-offset_bottom = 9.0
-
-[node name="B08" type="StaticBody2D" parent="." unique_id=356676949]
-position = Vector2(380, 2160)
-rotation = -0.35
-
-[node name="Collision" type="CollisionShape2D" parent="B08" unique_id=1646903375]
-shape = SubResource("5_bar")
-
-[node name="Visual" type="ColorRect" parent="B08" unique_id=82609631]
+[node name="Visual" type="ColorRect" parent="B06" unique_id=180353502]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
 [node name="P09" type="StaticBody2D" parent="." unique_id=597538669]
-position = Vector2(560, 2300)
+position = Vector2(850, 1810)
 
 [node name="Collision" type="CollisionShape2D" parent="P09" unique_id=512699303]
-shape = SubResource("3_plat_lg")
+shape = SubResource("4_plat_sm")
 
 [node name="Visual" type="ColorRect" parent="P09" unique_id=975191724]
-offset_left = -100.0
+offset_left = -70.0
 offset_top = -9.0
-offset_right = 100.0
+offset_right = 70.0
 offset_bottom = 9.0
 
-[node name="B09" type="StaticBody2D" parent="." unique_id=2037120915]
-position = Vector2(820, 2430)
-rotation = 0.3
+[node name="B07" type="StaticBody2D" parent="." unique_id=2037120915]
+position = Vector2(560, 1930)
+rotation = -0.25
 
-[node name="Collision" type="CollisionShape2D" parent="B09" unique_id=1268576588]
+[node name="Collision" type="CollisionShape2D" parent="B07" unique_id=1268576588]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B09" unique_id=941272165]
+[node name="Visual" type="ColorRect" parent="B07" unique_id=941272165]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
 [node name="P10" type="StaticBody2D" parent="." unique_id=1000043818]
-position = Vector2(230, 2560)
+position = Vector2(300, 2060)
 
 [node name="Collision" type="CollisionShape2D" parent="P10" unique_id=1123034937]
 shape = SubResource("4_plat_sm")
@@ -300,22 +293,22 @@ offset_top = -9.0
 offset_right = 70.0
 offset_bottom = 9.0
 
-[node name="B10" type="AnimatableBody2D" parent="." unique_id=1390237416]
-position = Vector2(660, 2680)
+[node name="B08" type="AnimatableBody2D" parent="." unique_id=1390237416]
+position = Vector2(750, 2170)
 script = ExtResource("2_rotscript")
-rotation_speed = -1.5
+rotation_speed = -2.3
 
-[node name="Collision" type="CollisionShape2D" parent="B10" unique_id=2056891912]
+[node name="Collision" type="CollisionShape2D" parent="B08" unique_id=2056891912]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B10" unique_id=1837685840]
+[node name="Visual" type="ColorRect" parent="B08" unique_id=1837685840]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
 [node name="P11" type="StaticBody2D" parent="." unique_id=536371492]
-position = Vector2(870, 2820)
+position = Vector2(570, 2310)
 
 [node name="Collision" type="CollisionShape2D" parent="P11" unique_id=1744154295]
 shape = SubResource("3_plat_lg")
@@ -326,21 +319,21 @@ offset_top = -9.0
 offset_right = 100.0
 offset_bottom = 9.0
 
-[node name="B11" type="StaticBody2D" parent="." unique_id=50721324]
-position = Vector2(310, 2950)
+[node name="B09" type="StaticBody2D" parent="." unique_id=50721324]
+position = Vector2(200, 2420)
 rotation = 0.35
 
-[node name="Collision" type="CollisionShape2D" parent="B11" unique_id=1049006050]
+[node name="Collision" type="CollisionShape2D" parent="B09" unique_id=1049006050]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B11" unique_id=1041342218]
+[node name="Visual" type="ColorRect" parent="B09" unique_id=1041342218]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
 [node name="P12" type="StaticBody2D" parent="." unique_id=901710518]
-position = Vector2(560, 3090)
+position = Vector2(850, 2560)
 
 [node name="Collision" type="CollisionShape2D" parent="P12" unique_id=1396331991]
 shape = SubResource("4_plat_sm")
@@ -351,211 +344,219 @@ offset_top = -9.0
 offset_right = 70.0
 offset_bottom = 9.0
 
-[node name="B12" type="StaticBody2D" parent="." unique_id=1702919494]
-position = Vector2(850, 3210)
-rotation = -0.3
+[node name="B10" type="AnimatableBody2D" parent="." unique_id=1702919494]
+position = Vector2(550, 2670)
+script = ExtResource("2_rotscript")
+rotation_speed = 2.8
 
-[node name="Collision" type="CollisionShape2D" parent="B12" unique_id=304626009]
+[node name="Collision" type="CollisionShape2D" parent="B10" unique_id=304626009]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B12" unique_id=606915384]
+[node name="Visual" type="ColorRect" parent="B10" unique_id=606915384]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
 [node name="P13" type="StaticBody2D" parent="." unique_id=551700981]
-position = Vector2(240, 3360)
+position = Vector2(220, 2800)
 
 [node name="Collision" type="CollisionShape2D" parent="P13" unique_id=92755738]
-shape = SubResource("3_plat_lg")
+shape = SubResource("4_plat_sm")
 
 [node name="Visual" type="ColorRect" parent="P13" unique_id=908026731]
-offset_left = -100.0
+offset_left = -70.0
 offset_top = -9.0
-offset_right = 100.0
+offset_right = 70.0
 offset_bottom = 9.0
 
-[node name="B13" type="AnimatableBody2D" parent="." unique_id=1985055668]
-position = Vector2(680, 3490)
-script = ExtResource("2_rotscript")
-rotation_speed = 2.2
+[node name="B11" type="StaticBody2D" parent="." unique_id=1985055668]
+position = Vector2(700, 2910)
+rotation = -0.3
 
-[node name="Collision" type="CollisionShape2D" parent="B13" unique_id=1234672893]
+[node name="Collision" type="CollisionShape2D" parent="B11" unique_id=1234672893]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B13" unique_id=1234660388]
+[node name="Visual" type="ColorRect" parent="B11" unique_id=1234660388]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
 [node name="P14" type="StaticBody2D" parent="." unique_id=443112555]
-position = Vector2(920, 3630)
+position = Vector2(500, 3050)
 
 [node name="Collision" type="CollisionShape2D" parent="P14" unique_id=2113223910]
-shape = SubResource("4_plat_sm")
+shape = SubResource("3_plat_lg")
 
 [node name="Visual" type="ColorRect" parent="P14" unique_id=1520878615]
-offset_left = -70.0
+offset_left = -100.0
 offset_top = -9.0
-offset_right = 70.0
+offset_right = 100.0
 offset_bottom = 9.0
 
-[node name="B14" type="StaticBody2D" parent="." unique_id=311686383]
-position = Vector2(420, 3760)
-rotation = -0.35
+[node name="B12" type="AnimatableBody2D" parent="." unique_id=311686383]
+position = Vector2(250, 3160)
+script = ExtResource("2_rotscript")
+rotation_speed = -3.0
 
-[node name="Collision" type="CollisionShape2D" parent="B14" unique_id=804194695]
+[node name="Collision" type="CollisionShape2D" parent="B12" unique_id=804194695]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B14" unique_id=195327953]
+[node name="Visual" type="ColorRect" parent="B12" unique_id=195327953]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
 [node name="P15" type="StaticBody2D" parent="." unique_id=1627246907]
-position = Vector2(600, 3900)
+position = Vector2(900, 3280)
 
 [node name="Collision" type="CollisionShape2D" parent="P15" unique_id=832719843]
-shape = SubResource("3_plat_lg")
+shape = SubResource("4_plat_sm")
 
 [node name="Visual" type="ColorRect" parent="P15" unique_id=743764212]
-offset_left = -100.0
+offset_left = -70.0
 offset_top = -9.0
-offset_right = 100.0
+offset_right = 70.0
 offset_bottom = 9.0
 
-[node name="B15" type="StaticBody2D" parent="." unique_id=1996831987]
-position = Vector2(800, 4020)
-rotation = 0.3
+[node name="B13" type="AnimatableBody2D" parent="." unique_id=1996831987]
+position = Vector2(580, 3400)
+script = ExtResource("2_rotscript")
+rotation_speed = 2.5
 
-[node name="Collision" type="CollisionShape2D" parent="B15" unique_id=647860665]
+[node name="Collision" type="CollisionShape2D" parent="B13" unique_id=647860665]
 shape = SubResource("5_bar")
 
-[node name="Visual" type="ColorRect" parent="B15" unique_id=1741339332]
+[node name="Visual" type="ColorRect" parent="B13" unique_id=1741339332]
 offset_left = -90.0
 offset_top = -7.0
 offset_right = 90.0
 offset_bottom = 7.0
 
-[node name="Orb" parent="." unique_id=374860369 instance=ExtResource("3_0bbpv")]
-position = Vector2(379, 1145)
+[node name="P16" type="StaticBody2D" parent="." unique_id=600000001]
+position = Vector2(280, 3550)
+
+[node name="Collision" type="CollisionShape2D" parent="P16" unique_id=600000002]
+shape = SubResource("4_plat_sm")
+
+[node name="Visual" type="ColorRect" parent="P16" unique_id=600000003]
+offset_left = -70.0
+offset_top = -9.0
+offset_right = 70.0
+offset_bottom = 9.0
+
+[node name="B14" type="StaticBody2D" parent="." unique_id=600000004]
+position = Vector2(750, 3660)
+rotation = 0.35
+
+[node name="Collision" type="CollisionShape2D" parent="B14" unique_id=600000005]
+shape = SubResource("5_bar")
+
+[node name="Visual" type="ColorRect" parent="B14" unique_id=600000006]
+offset_left = -90.0
+offset_top = -7.0
+offset_right = 90.0
+offset_bottom = 7.0
+
+[node name="P17" type="StaticBody2D" parent="." unique_id=600000007]
+position = Vector2(620, 3790)
+
+[node name="Collision" type="CollisionShape2D" parent="P17" unique_id=600000008]
+shape = SubResource("4_plat_sm")
+
+[node name="Visual" type="ColorRect" parent="P17" unique_id=600000009]
+offset_left = -70.0
+offset_top = -9.0
+offset_right = 70.0
+offset_bottom = 9.0
+
+[node name="B15" type="AnimatableBody2D" parent="." unique_id=600000010]
+position = Vector2(360, 3900)
+script = ExtResource("2_rotscript")
+rotation_speed = -2.8
+
+[node name="Collision" type="CollisionShape2D" parent="B15" unique_id=600000011]
+shape = SubResource("5_bar")
+
+[node name="Visual" type="ColorRect" parent="B15" unique_id=600000012]
+offset_left = -90.0
+offset_top = -7.0
+offset_right = 90.0
+offset_bottom = 7.0
+
+[node name="Orb1" parent="." unique_id=374860369 instance=ExtResource("3_0bbpv")]
+position = Vector2(600, 175)
 
 [node name="Orb2" parent="." unique_id=639174758 instance=ExtResource("3_0bbpv")]
-position = Vector2(679, 1405)
+position = Vector2(400, 345)
 
 [node name="Orb3" parent="." unique_id=1180100439 instance=ExtResource("3_0bbpv")]
-position = Vector2(487, 746)
+position = Vector2(160, 350)
 
 [node name="Orb4" parent="." unique_id=1871274249 instance=ExtResource("3_0bbpv")]
-position = Vector2(161, 1482)
+position = Vector2(970, 500)
 
 [node name="Orb5" parent="." unique_id=595184642 instance=ExtResource("3_0bbpv")]
-position = Vector2(934, 1836)
+position = Vector2(650, 670)
 
 [node name="Orb6" parent="." unique_id=416301475 instance=ExtResource("3_0bbpv")]
-position = Vector2(343, 2041)
+position = Vector2(350, 680)
 
 [node name="Orb7" parent="." unique_id=1955725502 instance=ExtResource("3_0bbpv")]
-position = Vector2(967, 1100)
+position = Vector2(920, 860)
 
 [node name="Orb8" parent="." unique_id=462437823 instance=ExtResource("3_0bbpv")]
-position = Vector2(755, 583)
+position = Vector2(550, 1010)
 
 [node name="Orb9" parent="." unique_id=1862286966 instance=ExtResource("3_0bbpv")]
-position = Vector2(708, 2163)
+position = Vector2(180, 1005)
 
 [node name="Orb10" parent="." unique_id=120577775 instance=ExtResource("3_0bbpv")]
-position = Vector2(310, 2414)
+position = Vector2(970, 1240)
 
 [node name="Orb11" parent="." unique_id=506451701 instance=ExtResource("3_0bbpv")]
-position = Vector2(890, 2602)
+position = Vector2(700, 1490)
 
 [node name="Orb12" parent="." unique_id=1274857119 instance=ExtResource("3_0bbpv")]
-position = Vector2(459, 2695)
+position = Vector2(520, 1490)
 
 [node name="Orb13" parent="." unique_id=1253270309 instance=ExtResource("3_0bbpv")]
-position = Vector2(608, 2495)
+position = Vector2(910, 1730)
 
 [node name="Orb14" parent="." unique_id=831513426 instance=ExtResource("3_0bbpv")]
-position = Vector2(144, 2850)
+position = Vector2(450, 1990)
 
 [node name="Orb15" parent="." unique_id=2045710839 instance=ExtResource("3_0bbpv")]
-position = Vector2(1030, 3012)
+position = Vector2(220, 1980)
 
 [node name="Orb16" parent="." unique_id=1693771828 instance=ExtResource("3_0bbpv")]
-position = Vector2(730, 3102)
+position = Vector2(680, 2230)
 
 [node name="Orb17" parent="." unique_id=573788595 instance=ExtResource("3_0bbpv")]
-position = Vector2(435, 3187)
+position = Vector2(960, 2480)
 
 [node name="Orb18" parent="." unique_id=581586831 instance=ExtResource("3_0bbpv")]
-position = Vector2(794, 3410)
+position = Vector2(550, 2720)
 
 [node name="Orb19" parent="." unique_id=880471348 instance=ExtResource("3_0bbpv")]
-position = Vector2(435, 3522)
+position = Vector2(160, 2720)
 
 [node name="Orb20" parent="." unique_id=949818194 instance=ExtResource("3_0bbpv")]
-position = Vector2(790, 3786)
+position = Vector2(700, 2970)
 
 [node name="Orb21" parent="." unique_id=725385962 instance=ExtResource("3_0bbpv")]
-position = Vector2(304, 4037)
+position = Vector2(380, 3170)
 
 [node name="Orb22" parent="." unique_id=751740089 instance=ExtResource("3_0bbpv")]
-position = Vector2(1038, 4047)
+position = Vector2(990, 3200)
 
 [node name="Orb23" parent="." unique_id=1511361705 instance=ExtResource("3_0bbpv")]
-position = Vector2(-4603, 3088)
+position = Vector2(200, 3480)
 
 [node name="Orb24" parent="." unique_id=1808049593 instance=ExtResource("3_0bbpv")]
-position = Vector2(144, 2286)
+position = Vector2(500, 3710)
 
 [node name="Orb25" parent="." unique_id=1031628665 instance=ExtResource("3_0bbpv")]
-position = Vector2(373, 1668)
-
-[node name="Orb26" parent="." unique_id=1510521743 instance=ExtResource("3_0bbpv")]
-position = Vector2(753, 1583)
-
-[node name="Orb27" parent="." unique_id=1807198778 instance=ExtResource("3_0bbpv")]
-position = Vector2(924, 1493)
-
-[node name="Orb28" parent="." unique_id=1506954874 instance=ExtResource("3_0bbpv")]
-position = Vector2(568, 1041)
-
-[node name="Orb29" parent="." unique_id=528690859 instance=ExtResource("3_0bbpv")]
-position = Vector2(248, 948)
-
-[node name="Orb30" parent="." unique_id=56156437 instance=ExtResource("3_0bbpv")]
-position = Vector2(828, 810)
-
-[node name="Orb31" parent="." unique_id=1911899536 instance=ExtResource("3_0bbpv")]
-position = Vector2(380, 589)
-
-[node name="Orb32" parent="." unique_id=39841138 instance=ExtResource("3_0bbpv")]
-position = Vector2(810, 342)
-
-[node name="Orb33" parent="." unique_id=1579250934 instance=ExtResource("3_0bbpv")]
-position = Vector2(979, 449)
-
-[node name="Orb34" parent="." unique_id=2058829822 instance=ExtResource("3_0bbpv")]
-position = Vector2(620, 1820)
-
-[node name="Orb35" parent="." unique_id=1216083575 instance=ExtResource("3_0bbpv")]
-position = Vector2(898, 2340)
-
-[node name="Orb36" parent="." unique_id=34577658 instance=ExtResource("3_0bbpv")]
-position = Vector2(553, 2980)
-
-[node name="Orb37" parent="." unique_id=1789665600 instance=ExtResource("3_0bbpv")]
-position = Vector2(180, 3258)
-
-[node name="Orb38" parent="." unique_id=1212451510 instance=ExtResource("3_0bbpv")]
-position = Vector2(407, 3668)
-
-[node name="Orb39" parent="." unique_id=1152019772 instance=ExtResource("3_0bbpv")]
-position = Vector2(934, 3545)
-
-[node name="Orb40" parent="." unique_id=2130511906 instance=ExtResource("3_0bbpv")]
-position = Vector2(593, 3799)
+position = Vector2(760, 3720)
