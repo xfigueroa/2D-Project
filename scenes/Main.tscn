@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cm4effb8vydkw"]
 
-[ext_resource type="PackedScene" path="res://Player/player1.tscn" id="1_ball"]
+[ext_resource type="PackedScene" uid="uid://drqhon543sjb3" path="res://Player/player1.tscn" id="1_ball"]
 [ext_resource type="Script" uid="uid://b1epycjqey3iu" path="res://scripts/rotating_bar.gd" id="2_rotscript"]
 [ext_resource type="PackedScene" uid="uid://c0maryol32tq8" path="res://Orbs/Orb.tscn" id="3_0bbpv"]
 [ext_resource type="Script" uid="uid://c4o68qs85am7g" path="res://scripts/death_ceiling.gd" id="4_ceiling"]

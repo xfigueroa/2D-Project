@@ -12,6 +12,7 @@ var _grounded := false
 
 func _ready() -> void:
 	add_to_group("player")
+	$Collision.shape = $Collision.shape.duplicate()
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	_grounded = false
