@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c0maryol32tq8"]
+
+[ext_resource type="Script" uid="uid://bvv3c7bef74nu" path="res://scripts/orb.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://cyt1rcaldsb1a" path="res://shaders/ball.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="1_mat"]
+shader = ExtResource("2_shader")
+shader_parameter/ball_color = Color(3, 1.5, 0, 1)
+shader_parameter/light_dir = Vector3(0.4, -0.7, 0.6)
+shader_parameter/ambient = 0.15
+shader_parameter/specular_power = 32.0
+shader_parameter/specular_strength = 0.8
+
+[sub_resource type="CircleShape2D" id="2_shape"]
+radius = 12.0
+
+[node name="Orb" type="Area2D" unique_id=1474320687]
+script = ExtResource("1_script")
+
+[node name="Visual" type="ColorRect" parent="." unique_id=180829056]
+material = SubResource("1_mat")
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1439976540]
+shape = SubResource("2_shape")

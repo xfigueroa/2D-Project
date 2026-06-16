@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://1x41enyfoi2j" path="res://scripts/player1.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://cyt1rcaldsb1a" path="res://shaders/ball.gdshader" id="2_shader"]
+[ext_resource type="PackedScene" path="res://UI/UI.tscn" id="3_ui"]
+
+[sub_resource type="ShaderMaterial" id="1_mat"]
+shader = ExtResource("2_shader")
+shader_parameter/ball_color = Color(0.0, 1.5, 3.5, 1.0)
+shader_parameter/light_dir = Vector3(0.4, -0.7, 0.6)
+shader_parameter/ambient = 0.15
+shader_parameter/specular_power = 32.0
+shader_parameter/specular_strength = 0.8
+
+[sub_resource type="PhysicsMaterial" id="2_phys"]
+bounce = 0.3
+friction = 0.8
+
+[sub_resource type="CircleShape2D" id="3_shape"]
+radius = 32.0
+
+[sub_resource type="Environment" id="4_env"]
+background_mode = 0
+background_color = Color(0.02, 0.02, 0.05, 1.0)
+glow_enabled = true
+glow_normalized = false
+glow_intensity = 1.2
+glow_bloom = 0.5
+glow_hdr_threshold = 0.5
+glow_hdr_scale = 2.0
+
+[node name="Player1" type="RigidBody2D"]
+contact_monitor = true
+max_contacts_reported = 4
+physics_material_override = SubResource("2_phys")
+script = ExtResource("1_script")
+metadata/_groups = ["player"]
+
+[node name="Visual" type="ColorRect" parent="."]
+material = SubResource("1_mat")
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("3_shape")
+
+[node name="Camera" type="Camera2D" parent="."]
+enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("4_env")
+
+[node name="UI" parent="." instance=ExtResource("3_ui")]
