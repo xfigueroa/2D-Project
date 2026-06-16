@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://main_scene"]
+
+[ext_resource type="PackedScene" path="res://scenes/Ball.tscn" id="1_ball"]
+[ext_resource type="Shader" path="res://shaders/ball.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="1_p2mat"]
+shader = ExtResource("2_shader")
+shader_parameter/ball_color = Color(1.0, 0.2, 0.0, 1.0)
+shader_parameter/light_dir = Vector3(0.4, -0.7, 0.6)
+shader_parameter/ambient = 0.15
+shader_parameter/specular_power = 32.0
+shader_parameter/specular_strength = 0.8
+
+[sub_resource type="RectangleShape2D" id="2_floor"]
+size = Vector2(1152.0, 32.0)
+
+[sub_resource type="RectangleShape2D" id="3_wall"]
+size = Vector2(32.0, 648.0)
+
+[node name="Main" type="Node2D"]
+
+[node name="Player1" parent="." instance=ExtResource("1_ball")]
+position = Vector2(400.0, 200.0)
+
+[node name="Player2" parent="." instance=ExtResource("1_ball")]
+position = Vector2(752.0, 200.0)
+
+[node name="Visual" parent="Player2" index="0"]
+material = SubResource("1_p2mat")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(576.0, 664.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("2_floor")
+
+[node name="WallLeft" type="StaticBody2D" parent="."]
+position = Vector2(16.0, 324.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+shape = SubResource("3_wall")
+
+[node name="WallRight" type="StaticBody2D" parent="."]
+position = Vector2(1136.0, 324.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+shape = SubResource("3_wall")
